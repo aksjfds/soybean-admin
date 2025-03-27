@@ -1,0 +1,42 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 指定你需要的 Node.js 版本
+
+      # 安装 PNPM
+      - name: Install PNPM
+        run: npm install -g pnpm
+
+      # 安装依赖
+      - name: Install dependencies
+        run: pnpm i
+
+      # 构建项目
+      - name: Build project
+        run: pnpm build
+
+      # 运行开发模式（可选）
+      - name: Run dev
+        run: pnpm dev &
+        # 使用 & 将其放入后台运行，因为 dev 通常是一个持续运行的进程
+
