@@ -1,5 +1,5 @@
 # 使用 Node.js 20 的官方镜像作为基础镜像（对应 Setup Node.js 步骤）
-FROM node:20
+FROM node:20-slim
 
 # 设置工作目录
 WORKDIR /app
